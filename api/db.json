@@ -1,0 +1,43 @@
+{
+  "department": [
+    {
+      "id": "87675",
+      "name": "Research and development"
+    },{
+      "id": "04687",
+      "name": "Finance and accounting"
+    },{
+      "id": "98467",
+      "name": "Sales and marketing"
+    },{
+      "id": "78674",
+      "name": "IT"
+    },{
+      "id": "98756",
+      "name": "Operations"
+    }
+  ],
+  "employee": [
+    {
+      "id": "77895",
+      "firstName": "Vera",
+      "lastName": "Lynn",
+      "departmentId": "98756"
+    },{
+      "id": "87923",
+      "firstName": "Leo",
+      "lastName": "Kachanov",
+      "departmentId": "98467"
+    },{
+      "id": "87443",
+      "firstName": "Serg",
+      "lastName": "Abramov",
+      "departmentId": "78674"
+    },{
+      "id": "90907",
+      "firstName": "Helen",
+      "lastName": "Powers",
+      "departmentId": "04687"
+    }
+  ]
+}

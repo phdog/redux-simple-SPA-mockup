@@ -1,0 +1,63 @@
+.frontpage {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+
+
+  &--container {
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-flow: row wrap;
+
+    &--left {
+
+      &--menu {
+        margin-bottom: 40px;
+      }
+
+      &--list {
+
+      }
+
+    }
+
+    &--right {
+      margin-left: 40px;
+      max-width: 500px;
+      min-width: 380px;
+      display: flex;
+      flex-flow: column;
+      justify-content: start;
+      align-items: center;
+
+      &--table {
+        width: 100%;
+        max-height: 200px;
+
+        &__row {
+          height: 65px;
+        }
+
+        &__field {
+          width: 230px;
+        }
+
+        &__edit {
+          cursor: pointer;
+        }
+
+      }
+
+      &--buttons {
+        margin-top: 3vw;
+
+      }
+    }
+
+  }
+
+
+}
