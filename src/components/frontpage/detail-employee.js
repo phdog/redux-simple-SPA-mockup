@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Input, Dropdown, Select } from 'semantic-ui-react';
+import { Table, Icon, Input, Dropdown } from 'semantic-ui-react';
 import _ from 'lodash';
 import { selectList, selectDetails } from '../../selectors';
 import * as action from '../../constants/actions';
@@ -26,10 +26,14 @@ class EmployeeDetail extends Component {
   }
 
   renderField(field) {
-    const { employee, list, details } = this.props;
+    const { employee, list, details, dispatch } = this.props;
     const id = list.id;
     if (details.field && details.field === field) {
-      return <Input size='mini' onChange={this.handleInput.bind(this)}/>
+      return <Input size='mini'
+        value={employee.entities.employee[id][field]}
+        onChange={this.handleInput.bind(this)}
+        onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
+      />
     } else {
       return (
         <p> {employee.entities.employee[id][field]} </p>
@@ -49,32 +53,51 @@ class EmployeeDetail extends Component {
     } })
   }
 
-  renderSelect() {
-    const { department } = this.props;
-    const arr = _.values(department.entities.department)
-    console.log(arr)
-
-    return (
-      <Dropdown placeholder='Select Department'/>
-    )
-
-  }
-
   renderDepartment() {
-    const { employee, department, list, details } = this.props;
+    const { employee, department, list, details, dispatch } = this.props;
     const id = list.id;
     const departmentId = employee.entities.employee[id]['departmentId'];
     const departmentName = department.entities.department[departmentId]['name'];
     if (details.field === 'departmentId') {
+      // make an array of objects
+      var arr = _.values(department.entities.department);
+      var keyMap = { name: 'text', id: 'value' };
+      var newArr = [];
+
+      arr.forEach((dpt, i) => {
+        let transformed = _.mapKeys(dpt, function(value, key) {
+          return keyMap[key]
+        })
+        newArr.push(transformed)
+      })
+
+
       return (
         <Dropdown
+          fluid
           placeholder='Select Department'
-          options={_.values(department.entities.department)}
+          closeOnChange={true}
+          options={newArr}
+          value={departmentId}
+          onChange={(e, data) => {
+            dispatch({ type: action.EDIT_DATA, payload: {
+              entity: list.entity,
+              id: list.id,
+              field: details.field,
+              value: data.value
+            } })
+
+          }}
+          onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
         />
       );
     } else {
       return departmentName
     }
+  }
+
+  handleSelect(e) {
+  //  console.log(e.target.value)
   }
 
   render() {
@@ -109,7 +132,8 @@ class EmployeeDetail extends Component {
             <Table.Cell>
             Department :
             </Table.Cell>
-            <Table.Cell textAlign='left' className='frontpage--container--right--table__field'>
+            <Table.Cell textAlign='left' className='frontpage--container--right--table__field'
+              onClick={() => {this.triggerEdit('departmentId')}}>
               {this.renderDepartment()}
             </Table.Cell>
             <Table.Cell textAlign='right' className='frontpage--container--right--table__edit'

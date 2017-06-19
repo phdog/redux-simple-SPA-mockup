@@ -25,10 +25,14 @@ class DepartmentDetail extends Component {
   }
 
   renderField(field) {
-    const { department, list, details } = this.props;
+    const { department, list, details, dispatch } = this.props;
     const id = list.id;
     if (details.field && details.field === field) {
-      return <Input size='mini' onChange={this.handleInput.bind(this)}/>
+      return <Input size='mini'
+        value={department.entities.department[id][field]}
+        onChange={this.handleInput.bind(this)}
+        onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
+      />
     } else {
       return (
         <p> {department.entities.department[id][field]} </p>

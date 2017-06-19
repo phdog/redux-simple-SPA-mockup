@@ -27,7 +27,7 @@ export default (
   />
   <Route
     path={'/department/:id'}
-    components={{ menu: Menu, list: List, details: DepartmentDetail }}
+    components={{ menu: Menu, list: List, details: DepartmentDetail, buttons: Buttons }}
   />
 
 </Route>

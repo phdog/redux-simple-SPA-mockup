@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import App from '../components/app';
+import App from '../components/commons/app';
 import Frontpage from './frontpage';
 import { getApiData } from './callbacks';
 
