@@ -43,7 +43,7 @@ const config = {
         use: 'json-loader'
       },
       {
-        test: /\.woff$/,
+        test: /\.(woff|woff2|ttf|eot)$/,
         use: 'file-loader'
       },
       {

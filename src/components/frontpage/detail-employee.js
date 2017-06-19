@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Input, Select } from 'semantic-ui-react';
+import { Table, Icon, Input, Dropdown, Select } from 'semantic-ui-react';
+import _ from 'lodash';
 import { selectList, selectDetails } from '../../selectors';
 import * as action from '../../constants/actions';
 
@@ -25,32 +26,52 @@ class EmployeeDetail extends Component {
   }
 
   renderField(field) {
-    const { employee, list, details, dispatch } = this.props;
+    const { employee, list, details } = this.props;
     const id = list.id;
     if (details.field && details.field === field) {
-      return <Input size='mini'/>
+      return <Input size='mini' onChange={this.handleInput.bind(this)}/>
     } else {
       return (
-        <p> {employee.entities.employees[id][field]} </p>
+        <p> {employee.entities.employee[id][field]} </p>
       )
     }
   }
 
-  renderInput() {
-
+  handleInput(e) {
+    const { list, details, dispatch } = this.props;
+    console.log(list.entity, list.id, details.field);
+    console.log(e.target.value)
+    dispatch({ type: action.EDIT_DATA, payload: {
+      entity: list.entity,
+      id: list.id,
+      field: details.field,
+      value: e.target.value
+    } })
   }
 
   renderSelect() {
+    const { department } = this.props;
+    const arr = _.values(department.entities.department)
+    console.log(arr)
+
+    return (
+      <Dropdown placeholder='Select Department'/>
+    )
 
   }
 
   renderDepartment() {
     const { employee, department, list, details } = this.props;
     const id = list.id;
-    const departmentId = employee.entities.employees[id]['departmentId'];
-    const departmentName = department.entities.departments[departmentId]['name'];
+    const departmentId = employee.entities.employee[id]['departmentId'];
+    const departmentName = department.entities.department[departmentId]['name'];
     if (details.field === 'departmentId') {
-      return <Select placeholder='Select Department'/>
+      return (
+        <Dropdown
+          placeholder='Select Department'
+          options={_.values(department.entities.department)}
+        />
+      );
     } else {
       return departmentName
     }

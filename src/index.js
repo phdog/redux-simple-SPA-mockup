@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'
 import ReduxWare from './redux';
+import 'semantic-ui-css/semantic.min.css';
 
 const routes = require('./routes/index').default();
 const render = appRoutes => {

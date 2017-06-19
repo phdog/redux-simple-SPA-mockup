@@ -13,13 +13,18 @@
     flex-flow: row wrap;
 
     &--left {
+      height: 326px;
+      max-height: 326px;
 
       &--menu {
         margin-bottom: 40px;
       }
 
       &--list {
-
+        position:relative;
+        max-height: 205px;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
 
     }

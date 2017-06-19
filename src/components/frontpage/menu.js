@@ -20,7 +20,7 @@ class EntityMenu extends Component {
   render() {
     const { entity, list } = this.props;
     return (
-      <Menu pointing vertical >
+      <Menu pointing vertical>
         <Menu.Item
           name='department'
           active={list.entity === 'department'}
