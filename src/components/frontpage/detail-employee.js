@@ -59,18 +59,18 @@ class EmployeeDetail extends Component {
     const departmentId = employee.entities.employee[id]['departmentId'];
     const departmentName = department.entities.department[departmentId]['name'];
     if (details.field === 'departmentId') {
-      // make an array of objects
+
+// make an array of objects
       var arr = _.values(department.entities.department);
+// remap to keys required by Dropdown Component
       var keyMap = { name: 'text', id: 'value' };
       var newArr = [];
-
       arr.forEach((dpt, i) => {
         let transformed = _.mapKeys(dpt, function(value, key) {
           return keyMap[key]
         })
         newArr.push(transformed)
       })
-
 
       return (
         <Dropdown
@@ -86,7 +86,6 @@ class EmployeeDetail extends Component {
               field: details.field,
               value: data.value
             } })
-
           }}
           onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
         />
@@ -94,10 +93,6 @@ class EmployeeDetail extends Component {
     } else {
       return departmentName
     }
-  }
-
-  handleSelect(e) {
-  //  console.log(e.target.value)
   }
 
   render() {
