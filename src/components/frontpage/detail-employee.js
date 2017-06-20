@@ -83,6 +83,7 @@ class EmployeeDetail extends Component {
       return (
         <Dropdown
           fluid
+          defaultOpen={true}
           placeholder='Select Department'
           closeOnChange={true}
           options={newArr}
