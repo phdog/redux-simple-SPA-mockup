@@ -29,14 +29,24 @@ class DepartmentDetail extends Component {
     const id = list.id;
     if (details.field && details.field === field) {
       return <Input size='mini'
+        focus={true}
+        tabIndex={1}
         value={department.entities.department[id][field]}
         onChange={this.handleInput.bind(this)}
+        onKeyPress={this.handleKeyPress.bind(this)}
         onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
       />
     } else {
       return (
         <p> {department.entities.department[id][field]} </p>
       )
+    }
+  }
+
+  handleKeyPress(target) {
+    const { dispatch } = this.props;
+    if (target.charCode === 13) {
+      dispatch({ type: action.FLUSH_EDIT })
     }
   }
 

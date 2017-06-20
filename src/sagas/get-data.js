@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { normalize } from 'normalizr';
-import { departmentListSchema, employeeListSchema } from './schema';
+import { departmentListSchema, employeeListSchema } from '../constants/model';
 import axios from 'axios';
 import * as action from '../constants/actions';
 import config from '../constants/config';

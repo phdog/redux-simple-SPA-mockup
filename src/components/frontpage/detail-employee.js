@@ -10,9 +10,9 @@ class EmployeeDetail extends Component {
   triggerEdit(field) {
     const { details, dispatch } = this.props;
     if (details.field && details.field === field) {
-      dispatch({ type: action.TRIGGER_EDIT, payload: '' })
+      dispatch({ type: action.TRIGGER_EDIT, payload: '' });
     } else {
-      dispatch({ type: action.TRIGGER_EDIT, payload: field })
+      dispatch({ type: action.TRIGGER_EDIT, payload: field });
     }
   }
 
@@ -30,8 +30,11 @@ class EmployeeDetail extends Component {
     const id = list.id;
     if (details.field && details.field === field) {
       return <Input size='mini'
+        focus={true}
+        tabIndex={1}
         value={employee.entities.employee[id][field]}
         onChange={this.handleInput.bind(this)}
+        onKeyPress={this.handleKeyPress.bind(this)}
         onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
       />
     } else {
@@ -41,10 +44,15 @@ class EmployeeDetail extends Component {
     }
   }
 
+  handleKeyPress(target) {
+    const { dispatch } = this.props;
+    if (target.charCode === 13) {
+      dispatch({ type: action.FLUSH_EDIT })
+    }
+  }
+
   handleInput(e) {
     const { list, details, dispatch } = this.props;
-    console.log(list.entity, list.id, details.field);
-    console.log(e.target.value)
     dispatch({ type: action.EDIT_DATA, payload: {
       entity: list.entity,
       id: list.id,
