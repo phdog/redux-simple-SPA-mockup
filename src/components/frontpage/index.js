@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 
 class Frontpage extends Component {
   render() {
-    const { menu, list, details, buttons } = this.props;
+    const { menu, list, details, buttons, search } = this.props;
     return (
     <div className="frontpage">
       <div className="frontpage--container">
         <div className="frontpage--container--left">
       <div className="frontpage--container--left--menu">
         {menu}
+      </div>
+      <div className="frontpage--container--left--search">
+        {search}
       </div>
       <div className="frontpage--container--left--list">
         {list}

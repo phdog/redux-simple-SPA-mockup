@@ -6,12 +6,13 @@ import List from '../components/frontpage/list';
 import EmployeeDetail from '../components/frontpage/detail-employee';
 import DepartmentDetail from '../components/frontpage/detail-department';
 import Buttons from '../components/frontpage/buttons';
+import Search from '../components/frontpage/search';
 
 export default (
 
 <Route component={Frontpage}>
 
-  <IndexRoute components={{ menu: Menu }} />
+  <IndexRoute components={{ menu: Menu, search: Search }} />
 
   <Route
     path={'/employee'}
