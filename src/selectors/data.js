@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import { selectList, selectSearch } from './ui';
+import { selectList } from './ui';
 
 function getDepartment(state) {
   if (state.data && state.data.department.entities && state.data.department.entities.department) {
