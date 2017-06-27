@@ -9,7 +9,7 @@
     "api:watch": "json-server --watch api/db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Max Kachanov",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
