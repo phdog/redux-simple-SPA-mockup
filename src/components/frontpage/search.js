@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import * as action from '../../constants/actions';
-import { Input } from 'semantic-ui-react';
-import { selectSearch } from '../../selectors';
+import { Input, Menu } from 'semantic-ui-react';
+import {
+  selectList,
+  selectSearch } from '../../selectors';
 
 class Search extends Component {
 
@@ -11,9 +14,39 @@ class Search extends Component {
     dispatch({ type: action.TRIGGER_SEARCH, payload: e.target.value })
   }
 
-  renderSearchList() {
-    const { search } = this.props;
-    if (search) {return <div>hello</div>}
+  matches() {
+    const { employee, department, search } = this.props;
+    let regex = new RegExp(search);
+    const Arr = ['hey', 'hello', 'how are you', 'fine'];
+    let newArr = [];
+    Arr.map(item => {
+      if (item.match(regex)) { newArr.push(item) }
+    })
+    console.log(newArr)
+  }
+
+  renderFindList() {
+    const { employee, search } = this.props;
+    if (search) {
+      return (
+        <Menu vertical fluid borderless>
+
+          {employee.result.map(id => {
+            let firstName = employee.entities.employee[id]['firstName']
+            let lastName = employee.entities.employee[id]['lastName']
+            let fullName = `${lastName} ${firstName}`
+            return (
+              <Link to={`/employee/${id}`} key={id}>
+              <Menu.Item name={fullName}>
+              </Menu.Item>
+            </Link>
+          )
+        })
+      }
+
+        </Menu>
+      );
+    }
     else { return null }
   }
 
@@ -27,7 +60,8 @@ class Search extends Component {
         onChange={this.handleInput.bind(this)}
         value={search}
       />
-      {this.renderSearchList()}
+      {this.renderFindList()}
+      {this.matches()}
     </div>
     );
   }
@@ -35,7 +69,9 @@ class Search extends Component {
 
 function mapStateToProps(state) {
   return {
-    search: selectSearch(state)
+    search: selectSearch(state),
+    employee: state.data.employee,
+    department: state.data.department
   }
 }
 
