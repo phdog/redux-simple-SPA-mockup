@@ -39,6 +39,10 @@ const config = {
         exclude: /node_modules/
       },
       {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
+      },
+      {
         test: /\.json$/,
         use: 'json-loader'
       },
@@ -66,9 +70,10 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json']
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.json']
   },
   devtool:  'eval',
+  target: 'web',
   devServer: {
     progress: true,
     hot: true,
