@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import _ from 'lodash';
 import * as action from '../../constants/actions';
 import { Input, Menu } from 'semantic-ui-react';
 import {
-  selectList,
+  selectSearchData,
   selectSearch } from '../../selectors';
 
 class Search extends Component {
@@ -15,14 +16,32 @@ class Search extends Component {
   }
 
   matches() {
-    const { employee, department, search } = this.props;
-    let regex = new RegExp(search);
-    const Arr = ['hey', 'hello', 'how are you', 'fine'];
-    let newArr = [];
-    Arr.map(item => {
-      if (item.match(regex)) { newArr.push(item) }
-    })
-    console.log(newArr)
+    const { searchData, search } = this.props;
+    if (search && searchData) {
+      let regex = new RegExp(search);
+      let newArr = [];
+      searchData.map(item => {
+        if (item.name.match(regex)) { newArr.push(item) }
+      })
+
+      return (
+        <Menu vertical fluid borderless>
+
+          {newArr.map(item => {
+            return (
+              <Link to={`/employee/${item.id}`} key={item.id}>
+              <Menu.Item name={item.name}>
+              </Menu.Item>
+            </Link>
+          )
+        })
+      }
+
+        </Menu>
+      );
+
+
+    }
   }
 
   renderFindList() {
@@ -60,7 +79,7 @@ class Search extends Component {
         onChange={this.handleInput.bind(this)}
         value={search}
       />
-      {this.renderFindList()}
+
       {this.matches()}
     </div>
     );
@@ -70,6 +89,7 @@ class Search extends Component {
 function mapStateToProps(state) {
   return {
     search: selectSearch(state),
+    searchData: selectSearchData(state),
     employee: state.data.employee,
     department: state.data.department
   }
