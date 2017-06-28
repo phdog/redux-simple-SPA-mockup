@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 import { getEmployee, getDepartment, selectList } from './index';
 
+export const getSearchMode = state => state.search.mode;
 const getSearch = state => state.search.search;
 const getSearchItem = state => state.search.item;
 
@@ -36,15 +37,20 @@ export const selectSearchData = createSelector(getEmployee, getDepartment, selec
 })
 
 // Filtered array -> Find Component
-export const selectFindData = createSelector(selectSearchData, selectSearch, (searchData, search) => {
-  if (searchData && search) {
+export const selectFindData = createSelector(selectSearchData, selectSearch, getSearchMode, (searchData, search, mode) => {
+  if (searchData && search && mode) {
+    console.log('HERE')
     let regex = new RegExp(search);
     let matchArr = [];
     searchData.map(item => {
       if (item.name.match(regex)) { matchArr.push(item) }
     })
     return matchArr
-  } else { return []}
+  } else if (searchData && mode && !search) {
+    console.log('THERE')
+    return searchData;
+  }
+  else { return []}
 })
 
 export const selectActiveIndex = createSelector(getSearchItem, selectFindData, (item, findData) => {

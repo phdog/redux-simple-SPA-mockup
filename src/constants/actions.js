@@ -9,7 +9,12 @@ export const FLUSH_EDIT = 'select_edit'; //turn off editing mode
 export const EDIT_DATA = 'edit_data'; //editing values
 
 // SEARCH
+export const START_SEARCH = 'start_search';
 export const TRIGGER_SEARCH = 'trigger_search';
 export const FLUSH_SEARCH = 'flush_search';
 export const SEARCH_UP = 'search_up';
 export const SEARCH_DOWN = 'search_down';
+
+//UI
+export const REQ_PENDING = 'request_pending';
+export const RES_RECEIVED = 'response_received';

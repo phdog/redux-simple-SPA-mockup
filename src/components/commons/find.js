@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 import { Menu } from 'semantic-ui-react';
 import * as action from '../../constants/actions';
 import {
+  getSearchMode,
   selectFindData,
-  selectSearch,
   selectActiveIndex
 } from '../../selectors';
 
@@ -17,8 +17,8 @@ class Find extends Component {
   }
 
   render() {
-    const { search, findData, activeIndex } = this.props;
-    if ( search && findData ) {
+    const { findData, activeIndex, mode } = this.props;
+    if ( mode && findData ) {
       return (
         <div className="frontpage--container--menu__find">
           <Menu vertical fluid borderless>
@@ -44,8 +44,8 @@ class Find extends Component {
 
 function mapStateToProps(state) {
   return {
+    mode: getSearchMode(state),
     findData: selectFindData(state),
-    search: selectSearch(state),
     activeIndex: selectActiveIndex(state)
   }
 }

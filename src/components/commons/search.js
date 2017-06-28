@@ -15,7 +15,7 @@ import {
     handleKeyDown(target) {
       const { dispatch, active } = this.props;
       switch(target.keyCode) {
-        case 13:
+        case 13: //Enter
           browserHistory.push(`/${active.entity}/${active.id}`)
           dispatch({ type: action.FLUSH_SEARCH });
           break;
@@ -24,6 +24,9 @@ import {
           break;
         case 38:
           dispatch({ type: action.SEARCH_DOWN });
+          break;
+        case 27: //Escape
+          dispatch({ type: action.FLUSH_SEARCH });
           break;
       }
 
@@ -35,13 +38,15 @@ import {
     }
 
 render() {
-  const { search } = this.props;
+  const { search, dispatch, active } = this.props;
+  let placeholder = active ? active.name : 'Search...';
   return (
     <div style={{width: '100%'}} className="frontpage--container--menu__search">
       <Input fluid
-        placeholder='Search...'
+        placeholder={placeholder}
         icon={{ name: 'search', circular: true, link: true }}
         onChange={this.handleInput.bind(this)}
+        onFocus={()=> {dispatch({type: action.START_SEARCH})}}
         value={search}
         onKeyDown={this.handleKeyDown.bind(this)}
       />

@@ -1,10 +1,12 @@
 import './index.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 class Frontpage extends Component {
   render() {
-    const { menu, list, details, buttons, search } = this.props;
+    const { menu, list, details, buttons, search, loading } = this.props;
+    console.log(loading)
     return (
     <div className="frontpage">
       <div className="frontpage--container">
@@ -38,7 +40,8 @@ class Frontpage extends Component {
 
 function mapStateToProps(state) {
   return {
-    routing: state.routing
+    routing: state.routing,
+    loading: state.ui.loading
   };
 }
 

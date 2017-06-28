@@ -12,9 +12,12 @@ export default function* putData() {
     const data = yield select(selectData)
     const list = yield select(selectList)
     const requestURL = `${API}/${list.entity}/${list.id}`;
+    yield put({type: action.REQ_PENDING});
     const response = yield call(axios.put, requestURL, data, options);
     console.log(response.data);
   } catch (e) {
     console.log(e.response.data.error);
+  } finally {
+    yield put({type: action.RES_RECEIVED});
   }
 }
