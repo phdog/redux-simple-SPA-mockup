@@ -57,5 +57,5 @@ export const selectActiveIndex = createSelector(getSearchItem, selectFindData, (
 })
 
 export const selectActive = createSelector(selectActiveIndex, selectFindData, (activeIndex, findData) => {
-  if (findData && activeIndex) { return findData[activeIndex] } else { return {}}
+  if (findData) { return findData[activeIndex] } else { return {}}
 })
