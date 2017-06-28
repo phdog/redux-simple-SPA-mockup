@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Icon, Input  } from 'semantic-ui-react';
-import { selectList, selectDetails } from '../../selectors';
+import {
+  getDepartment,
+  getDepartmentList,
+  selectList,
+  selectDetails } from '../../selectors';
 import * as action from '../../constants/actions';
 
 class DepartmentDetail extends Component {
@@ -31,14 +35,14 @@ class DepartmentDetail extends Component {
       return <Input size='mini'
         focus={true}
         tabIndex={1}
-        value={department.entities.department[id][field]}
+        value={department[id][field]}
         onChange={this.handleInput.bind(this)}
         onKeyPress={this.handleKeyPress.bind(this)}
         onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
       />
     } else {
       return (
-        <p> {department.entities.department[id][field]} </p>
+        <p> {department[id][field]} </p>
       )
     }
   }
@@ -52,8 +56,6 @@ class DepartmentDetail extends Component {
 
   handleInput(e) {
     const { list, details, dispatch } = this.props;
-    console.log(list.entity, list.id, details.field);
-    console.log(e.target.value)
     dispatch({ type: action.EDIT_DATA, payload: {
       entity: list.entity,
       id: list.id,
@@ -86,7 +88,8 @@ class DepartmentDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    department: state.data.department,
+    department: getDepartment(state),
+    departmentList: getDepartmentList(state),
     list: selectList(state),
     details: selectDetails(state)
   };

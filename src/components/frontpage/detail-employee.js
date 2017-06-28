@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Icon, Input, Dropdown } from 'semantic-ui-react';
-import _ from 'lodash';
-import { selectList, selectDetails } from '../../selectors';
+import {
+  getEmployee,
+  getEmployeeList,
+  getDepartment,
+  getDepartmentList,
+  selectDepartmentRender,
+  selectList,
+  selectDetails } from '../../selectors';
 import * as action from '../../constants/actions';
 
 class EmployeeDetail extends Component {
@@ -32,14 +38,14 @@ class EmployeeDetail extends Component {
       return <Input size='mini'
         focus={true}
         tabIndex={1}
-        value={employee.entities.employee[id][field]}
+        value={employee[id][field]}
         onChange={this.handleInput.bind(this)}
         onKeyPress={this.handleKeyPress.bind(this)}
         onBlur={() => {dispatch({ type: action.FLUSH_EDIT })}}
       />
     } else {
       return (
-        <p> {employee.entities.employee[id][field]} </p>
+        <p> {employee[id][field]} </p>
       )
     }
   }
@@ -62,23 +68,11 @@ class EmployeeDetail extends Component {
   }
 
   renderDepartment() {
-    const { employee, department, list, details, dispatch } = this.props;
+    const { employee, department, departmentRender, list, details, dispatch } = this.props;
     const id = list.id;
-    const departmentId = employee.entities.employee[id]['departmentId'];
-    const departmentName = department.entities.department[departmentId]['name'];
+    const departmentId = employee[id]['departmentId'];
+    const departmentName = department[departmentId]['name'];
     if (details.field === 'departmentId') {
-
-// make an array of objects
-      var arr = _.values(department.entities.department);
-// remap to keys required by Dropdown Component
-      var keyMap = { name: 'text', id: 'value' };
-      var newArr = [];
-      arr.forEach((dpt, i) => {
-        let transformed = _.mapKeys(dpt, function(value, key) {
-          return keyMap[key]
-        })
-        newArr.push(transformed)
-      })
 
       return (
         <Dropdown
@@ -86,7 +80,7 @@ class EmployeeDetail extends Component {
           defaultOpen={true}
           placeholder='Select Department'
           closeOnChange={true}
-          options={newArr}
+          options={departmentRender}
           value={departmentId}
           onChange={(e, data) => {
             dispatch({ type: action.EDIT_DATA, payload: {
@@ -153,8 +147,11 @@ class EmployeeDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    employee: state.data.employee,
-    department: state.data.department,
+    employee: getEmployee(state),
+    employeeList: getEmployeeList(state),
+    department: getDepartment(state),
+    departmentList: getDepartmentList(state),
+    departmentRender: selectDepartmentRender(state),
     list: selectList(state),
     details: selectDetails(state)
   };

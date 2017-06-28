@@ -5,7 +5,8 @@ import * as action from '../../constants/actions';
 import { Input, Menu } from 'semantic-ui-react';
 import {
   selectSearchData,
-  selectSearch } from '../../selectors';
+  selectSearch
+ } from '../../selectors';
 
   class Search extends Component {
 
@@ -58,9 +59,7 @@ render() {
 function mapStateToProps(state) {
   return {
     search: selectSearch(state),
-    searchData: selectSearchData(state),
-    employee: state.data.employee,
-    department: state.data.department
+    searchData: selectSearchData(state)
   }
 }
 

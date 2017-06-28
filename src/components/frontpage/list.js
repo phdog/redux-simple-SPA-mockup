@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Menu } from 'semantic-ui-react';
-import { selectList } from '../../selectors';
+import {
+  selectList,
+  getEmployee,
+  getEmployeeList,
+  getDepartment,
+  getDepartmentList } from '../../selectors';
 
 class EmployeeList extends Component {
 
   render() {
-    const { employee, department, list } = this.props;
+    const { employee, employeeList, department, departmentList, list } = this.props;
     if (!employee && !department) {
       return <div />
     }
@@ -15,9 +20,9 @@ class EmployeeList extends Component {
       <Menu vertical fluid borderless>
 
         {list.entity === 'employee' ?
-        employee.result.map(id => {
-          let firstName = employee.entities.employee[id]['firstName']
-          let lastName = employee.entities.employee[id]['lastName']
+        employeeList.map(id => {
+          let firstName = employee[id]['firstName']
+          let lastName = employee[id]['lastName']
           let fullName = `${lastName} ${firstName}`
           return (
             <Link to={`/employee/${id}`} key={id}>
@@ -26,11 +31,11 @@ class EmployeeList extends Component {
           </Link>
         )
       }) :
-      department.result.map(id => {
+      departmentList.map(id => {
         return (
           <Link to={`/department/${id}`} key={id}>
           <Menu.Item
-            name={department.entities.department[id]['name']}
+            name={department[id]['name']}
             active={list.id === id}>
           </Menu.Item>
         </Link>
@@ -45,8 +50,10 @@ class EmployeeList extends Component {
 
 function mapStateToProps(state) {
   return {
-    employee: state.data.employee,
-    department: state.data.department,
+    employee: getEmployee(state),
+    employeeList: getEmployeeList(state),
+    department: getDepartment(state),
+    departmentList: getDepartmentList(state),
     list: selectList(state)
   };
 }
