@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Menu } from 'semantic-ui-react';
+import Search from './search';
 import { selectList } from '../../selectors';
 
 class EntityMenu extends Component {
@@ -13,7 +14,7 @@ class EntityMenu extends Component {
   render() {
     const { list } = this.props;
     return (
-      <Menu pointing vertical>
+      <Menu>
         <Menu.Item
           name='department'
           active={list.entity === 'department'}
@@ -24,6 +25,11 @@ class EntityMenu extends Component {
           active={list.entity === 'employee'}
           onClick={this.handleItemClick.bind(this)}
         />
+        <Menu.Menu position='right'>
+          <Menu.Item style={{width: '250px'}}>
+            <Search />
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     )
   }

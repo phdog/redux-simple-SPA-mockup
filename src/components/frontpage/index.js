@@ -8,9 +8,12 @@ class Frontpage extends Component {
     return (
     <div className="frontpage">
       <div className="frontpage--container">
+        <div className="frontpage--container--menu">
+          {menu}
+        </div>
         <div className="frontpage--container--left">
       <div className="frontpage--container--left--menu">
-        {menu}
+
       </div>
       <div className="frontpage--container--left--search">
         {search}

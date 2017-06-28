@@ -1,18 +1,19 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import Frontpage from '../components/frontpage';
-import Menu from '../components/frontpage/menu';
 import List from '../components/frontpage/list';
 import EmployeeDetail from '../components/frontpage/detail-employee';
 import DepartmentDetail from '../components/frontpage/detail-department';
 import Buttons from '../components/frontpage/buttons';
-import Search from '../components/frontpage/search';
+import Search from '../components/commons/search';
+import Menu from '../components/commons/menu';
+
 
 export default (
 
 <Route component={Frontpage}>
 
-  <IndexRoute components={{ menu: Menu, search: Search }} />
+  <IndexRoute components={{ menu: Menu }} />
 
   <Route
     path={'/employee'}

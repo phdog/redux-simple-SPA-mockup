@@ -8,5 +8,6 @@ export const TRIGGER_EDIT = 'trigger_edit'; //toggle editing mode
 export const FLUSH_EDIT = 'select_edit'; //turn off editing mode
 export const EDIT_DATA = 'edit_data'; //editing values
 
-// Search
+// SEARCH
 export const TRIGGER_SEARCH = 'trigger_search';
+export const FLUSH_SEARCH = 'flush_search';
