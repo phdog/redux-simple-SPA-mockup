@@ -39,7 +39,6 @@ export const selectSearchData = createSelector(getEmployee, getDepartment, selec
 // Filtered array -> Find Component
 export const selectFindData = createSelector(selectSearchData, selectSearch, getSearchMode, (searchData, search, mode) => {
   if (searchData && search && mode) {
-    console.log('HERE')
     let regex = new RegExp(search);
     let matchArr = [];
     searchData.map(item => {
@@ -47,7 +46,6 @@ export const selectFindData = createSelector(selectSearchData, selectSearch, get
     })
     return matchArr
   } else if (searchData && mode && !search) {
-    console.log('THERE')
     return searchData;
   }
   else { return []}
