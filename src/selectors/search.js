@@ -47,11 +47,15 @@ export const selectFindData = createSelector(selectSearchData, selectSearch, (se
   } else { return []}
 })
 
-export const selectActive = createSelector(getSearchItem, selectFindData, (item, findData) => {
+export const selectActiveIndex = createSelector(getSearchItem, selectFindData, (item, findData) => {
   let Item;
   const min = 0;
   let max = findData.length;
   let range = max - min;
   Item = (item - min) % range;
   if (Item < 0) { return Math.abs(Item + range) } else { return Math.abs(Item) }
+})
+
+export const selectActive = createSelector(selectActiveIndex, selectFindData, (activeIndex, findData) => {
+  if (findData && activeIndex) { return findData[activeIndex] } else { return {}}
 })

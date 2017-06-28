@@ -6,7 +6,7 @@ import * as action from '../../constants/actions';
 import {
   selectFindData,
   selectSearch,
-  selectActive
+  selectActiveIndex
 } from '../../selectors';
 
 class Find extends Component {
@@ -17,18 +17,17 @@ class Find extends Component {
   }
 
   render() {
-    const { search, findData, active } = this.props;
+    const { search, findData, activeIndex } = this.props;
     if ( search && findData ) {
-      console.log('ACTIVE', active)
       return (
         <div className="frontpage--container--menu__find">
-          <Menu vertical fluid borderless activeIndex={active}>
+          <Menu vertical fluid borderless>
             {findData.map((item, i) => {
               return (
                 <Link to={`/${item.entity}/${item.id}`} key={item.id}>
                 <Menu.Item
                   name={item.name}
-                  active={active === i}
+                  active={activeIndex === i}
                   onClick={this.handleClick.bind(this)}
                   >
                   </Menu.Item>
@@ -47,7 +46,7 @@ function mapStateToProps(state) {
   return {
     findData: selectFindData(state),
     search: selectSearch(state),
-    active: selectActive(state)
+    activeIndex: selectActiveIndex(state)
   }
 }
 

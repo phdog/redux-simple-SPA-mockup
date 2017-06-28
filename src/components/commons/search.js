@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as action from '../../constants/actions';
+import { browserHistory } from 'react-router';
 import { Input } from 'semantic-ui-react';
+import * as action from '../../constants/actions';
 import Find from './find';
 import {
   selectSearchData,
-  selectSearch
+  selectSearch,
+  selectActive
  } from '../../selectors';
 
   class Search extends Component {
 
     handleKeyDown(target) {
-      const { dispatch } = this.props;
+      const { dispatch, active } = this.props;
       switch(target.keyCode) {
         case 13:
+          browserHistory.push(`/${active.entity}/${active.id}`)
           dispatch({ type: action.FLUSH_SEARCH });
           break;
         case 40:
@@ -51,7 +54,8 @@ render() {
 function mapStateToProps(state) {
   return {
     search: selectSearch(state),
-    searchData: selectSearchData(state)
+    searchData: selectSearchData(state),
+    active: selectActive(state)
   }
 }
 
