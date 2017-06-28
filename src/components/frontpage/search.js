@@ -28,7 +28,7 @@ import {
           <Menu vertical fluid borderless>
             {newArr.map(item => {
               return (
-                <Link to={`/employee/${item.id}`} key={item.id}>
+                <Link to={`/${item.entity}/${item.id}`} key={item.id}>
                 <Menu.Item name={item.name}>
                 </Menu.Item>
               </Link>
