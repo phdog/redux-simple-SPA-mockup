@@ -8,7 +8,7 @@ import {
   getDepartmentList,
   selectDepartmentRender,
   selectList,
-  selectDetails } from '../../selectors';
+  selectField } from '../../selectors';
 import * as action from '../../constants/actions';
 
 class EmployeeDetail extends Component {
@@ -153,7 +153,7 @@ function mapStateToProps(state) {
     departmentList: getDepartmentList(state),
     departmentRender: selectDepartmentRender(state),
     list: selectList(state),
-    details: selectDetails(state)
+    details: selectField(state)
   };
 }
 

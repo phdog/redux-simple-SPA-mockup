@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
-import { selectList, selectDetails } from '../../selectors';
 import * as action from '../../constants/actions';
 
 class Buttons extends Component {
@@ -27,11 +26,4 @@ class Buttons extends Component {
 
 }
 
-function mapStateToProps(state) {
-  return {
-    list: selectList(state),
-    details: selectDetails(state)
-  };
-}
-
-export default connect(mapStateToProps)(Buttons);
+export default connect(null)(Buttons);

@@ -8,6 +8,6 @@ export const selectList = createSelector(getPath, path => {
   return { entity, id };
 })
 
-export const selectDetails = createSelector(getField, field => {
+export const selectField = createSelector(getField, field => {
   return { field };
 })

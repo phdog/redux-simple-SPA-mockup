@@ -10,6 +10,22 @@ import {
 
   class Search extends Component {
 
+    handleKeyDown(target) {
+      const { dispatch } = this.props;
+      switch(target.keyCode) {
+        case 13:
+          dispatch({ type: action.FLUSH_SEARCH });
+          break;
+        case 40:
+          dispatch({ type: action.SEARCH_UP });
+          break;
+        case 38:
+          dispatch({ type: action.SEARCH_DOWN });
+          break;
+      }
+
+    }
+
     handleInput(e) {
       const { dispatch } = this.props;
       dispatch({ type: action.TRIGGER_SEARCH, payload: e.target.value })
@@ -24,6 +40,7 @@ render() {
         icon={{ name: 'search', circular: true, link: true }}
         onChange={this.handleInput.bind(this)}
         value={search}
+        onKeyDown={this.handleKeyDown.bind(this)}
       />
       <Find />
     </div>
