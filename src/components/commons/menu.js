@@ -16,6 +16,11 @@ class EntityMenu extends Component {
     return (
       <Menu>
         <Menu.Item
+          name='All'
+          active={list.entity === ''}
+          onClick={()=>{browserHistory.push('/')}}
+        />
+        <Menu.Item
           name='department'
           active={list.entity === 'department'}
           onClick={this.handleItemClick.bind(this)}

@@ -38,15 +38,19 @@ export const selectSearchData = createSelector(getEmployee, getDepartment, selec
 
 // Filtered array -> Find Component
 export const selectFindData = createSelector(selectSearchData, selectSearch, getSearchMode, (searchData, search, mode) => {
+  const maxItems = 7;
   if (searchData && search && mode) {
     let regex = new RegExp(search);
     let matchArr = [];
     searchData.map(item => {
       if (item.name.match(regex)) { matchArr.push(item) }
     })
-    return matchArr
+    if (matchArr.length > maxItems) { return _.slice(matchArr, 0, maxItems) }
+    else { return matchArr }
+
   } else if (searchData && mode && !search) {
-    return searchData;
+    if (searchData.length > maxItems) { return _.slice(searchData, 0, maxItems) }
+    else { return searchData }
   }
   else { return []}
 })

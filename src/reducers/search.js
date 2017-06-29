@@ -14,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
     case START_SEARCH:
       return Immutable.set(state, 'mode', true);
     case TRIGGER_SEARCH:
-      return Immutable.set(state, 'search', action.payload);
+      return Immutable.merge(state, {search: action.payload, mode: true});
     case FLUSH_SEARCH:
       return Immutable.merge(state, INITIAL_STATE);
     case SEARCH_UP:
