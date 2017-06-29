@@ -18,7 +18,7 @@ export default function(state = INITIAL_STATE, action) {
     case FLUSH_SEARCH:
       return Immutable.merge(state, INITIAL_STATE);
     case SEARCH_UP:
-      return Immutable.set(state, 'item', state.item + 1);
+      return Immutable.merge(state, {item: state.item + 1, mode: true});
     case SEARCH_DOWN:
       return Immutable.set(state, 'item', state.item - 1);
   }

@@ -5,9 +5,7 @@ import List from '../components/frontpage/list';
 import EmployeeDetail from '../components/frontpage/detail-employee';
 import DepartmentDetail from '../components/frontpage/detail-department';
 import Buttons from '../components/frontpage/buttons';
-import Search from '../components/commons/search';
 import Menu from '../components/commons/menu';
-
 
 export default (
 

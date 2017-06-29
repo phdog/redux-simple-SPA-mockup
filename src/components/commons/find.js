@@ -11,7 +11,7 @@ import {
 
 class Find extends Component {
 
-  handleClick(e, data) {
+  handleClick() {
     const { dispatch } = this.props;
     dispatch({type: action.FLUSH_SEARCH})
   }

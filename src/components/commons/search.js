@@ -39,7 +39,7 @@ import {
 
 render() {
   const { search, dispatch, active } = this.props;
-  let placeholder = (active && search) ? active.name : 'Search...';
+  let placeholder = active ? active.name : 'Search...';
   return (
     <div style={{width: '100%'}} className="frontpage--container--menu__search">
       <Input fluid
